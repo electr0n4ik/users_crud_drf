@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: app_users
+    restart: always
+    command: sh -c "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8888"
+    env_file:
+      - .env
+    ports:
+      - "8888:8888"
+
+  db:
+    container_name: db_users
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    command: ["postgres", "-c", "log_statement=all"]
+    ports:
+      - "5432:5432"
+
+  
