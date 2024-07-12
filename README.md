@@ -50,7 +50,7 @@ docker-compose -f docker-compose.yml --env-file .env up --build
 
 ## Использование API
 
-Получение списка пользователей с телом запроса
+Получение списка пользователей, тело ответа
 
 ```shell
 {
